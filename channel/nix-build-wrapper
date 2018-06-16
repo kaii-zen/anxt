@@ -1,0 +1,6 @@
+#! /usr/bin/env nix-shell
+#! nix-shell -i bash -p nix findutils jq
+
+set -eo pipefail
+
+nix-build "$1" --no-out-link --argstr name "$2" --arg nixexprs "$3" --argstr binary-cache-url "$4" | xargs -I% jq -n --arg path '%' '{$path}'
