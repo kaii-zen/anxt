@@ -19,6 +19,11 @@ variable "nixexprs" {
   default = ""
 }
 
+variable "nix_channels" {
+  default     = {}
+  description = "Extra Nix channels"
+}
+
 variable "cloudtrail_s3_bucket" {
   type = "string"
 }
