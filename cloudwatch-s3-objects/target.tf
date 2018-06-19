@@ -36,7 +36,7 @@ data "aws_iam_policy_document" "ssm_lifecycle" {
 }
 
 resource "aws_iam_role" "ssm_lifecycle" {
-  name               = "${substr("${aws_cloudwatch_event_rule.this.name}-CloudwatchRole", 0, 64)}"
+  name               = "${format("%.64s", "${aws_cloudwatch_event_rule.this.name}-CloudwatchRole")}"
   description        = "Allow Cloudwatch to invoke ${var.run_command_document_arn} on instances with ${var.run_command_target_key}:[${join(",", var.run_command_target_values)}]"
   assume_role_policy = "${data.aws_iam_policy_document.ssm_lifecycle_trust.json}"
 }
