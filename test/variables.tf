@@ -13,11 +13,6 @@ variable "security_groups" {
   description = "Security group IDs for the austoscaling group"
 }
 
-variable "cloudtrail_s3_bucket" {
-  type        = "string"
-  description = "Name of an S3 bucket to use with cloudtrail. We must setup a cloudtrail for cloudwatch to be able to intercept individual S3 PUT events. Please refer to AWS documentation for the correct permissions."
-}
-
 variable "s3_bucket" {
   type        = "string"
   description = "This is the S3 bucket in which we are going to store the currently active nix expression."
