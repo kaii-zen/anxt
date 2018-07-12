@@ -13,6 +13,7 @@ resource "aws_launch_configuration" "this" {
 }
 
 resource "aws_autoscaling_group" "this" {
+  depends_on           = ["module.this"]
   name                 = "${module.this.name}"
   launch_configuration = "${aws_launch_configuration.this.name}"
   vpc_zone_identifier  = ["${var.subnet_ids}"]
