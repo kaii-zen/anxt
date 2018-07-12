@@ -21,8 +21,4 @@ resource "aws_autoscaling_group" "this" {
   desired_capacity     = "${var.count}"
 
   tags = ["${module.this.tags}"]
-
-  lifecycle {
-    create_before_destroy = true
-  }
 }
