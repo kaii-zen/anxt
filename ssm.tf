@@ -27,7 +27,8 @@ module "ssm_nixos_rebuild_switch" {
 }
 
 resource "aws_ssm_association" "nixos_rebuild_switch" {
-  name = "${module.ssm_nixos_rebuild_switch.name}"
+  name                = "${module.ssm_nixos_rebuild_switch.name}"
+  schedule_expression = "rate(5 minutes)"
 
   targets {
     key    = "tag:Id"
