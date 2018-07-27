@@ -14,7 +14,7 @@ module "user_channel" {
   source = "./channel"
   name   = "user"
 
-  # if no user expressions were provided we use a stab so that bootstrapping SSM can finish
+  # if no user expressions were provided we use a stub so that bootstrapping SSM can finish
   nixexprs = "${var.nixexprs == "" ? "${path.module}/nixos/user" : "${var.nixexprs}"}"
 }
 
