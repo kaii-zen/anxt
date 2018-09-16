@@ -1,5 +1,5 @@
 resource "aws_launch_configuration" "this" {
-  name_prefix          = "${module.this.name}"
+  name_prefix          = "${module.this.name_prefix}"
   image_id             = "${module.this.image_id}"
   iam_instance_profile = "${module.this.iam_instance_profile}"
   user_data            = "${module.this.userdata}"

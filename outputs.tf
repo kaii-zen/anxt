@@ -3,6 +3,11 @@ output "name" {
   value       = "${local.name}"
 }
 
+output "name_prefix" {
+  description = "same as `name` but with a dash at the end"
+  value       = "${local.name}-"
+}
+
 output "image_id" {
   description = "AMI ID corresponding to the NixOS release supplied."
   value       = "${module.ami.ami_id}"
