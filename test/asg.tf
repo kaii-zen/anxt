@@ -7,6 +7,11 @@ resource "aws_launch_configuration" "this" {
   instance_type        = "t2.micro"
   spot_price           = "1.00"
 
+  root_block_device {
+    volume_size = "50"
+    volume_type = "gp2"
+  }
+
   lifecycle {
     create_before_destroy = true
   }
