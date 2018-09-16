@@ -1,10 +1,4 @@
 locals {
-  policy_arns = [
-    "arn:aws:iam::aws:policy/service-role/AmazonEC2RoleforSSM",
-    "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess",
-    "arn:aws:iam::aws:policy/AmazonEC2ReadOnlyAccess",
-  ]
-
   name_kebab           = "${replace(var.display_name, " ", "-")}"
   name_kebab_lowercase = "${lower(local.name_kebab)}"
   name_CamelCase       = "${replace(title(var.display_name), " ", "")}"
