@@ -4,7 +4,7 @@ resource "aws_launch_configuration" "this" {
   iam_instance_profile = "${module.this.iam_instance_profile}"
   user_data            = "${module.this.userdata}"
   security_groups      = ["${var.security_groups}"]
-  instance_type        = "t2.micro"
+  instance_type        = "m4.large"
   spot_price           = "1.00"
 
   root_block_device {

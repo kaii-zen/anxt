@@ -1,0 +1,6 @@
+#!/run/current-system/sw/bin/nix-shell
+#! nix-shell -i bash -p jq awscli curl
+
+export AWS_DEFAULT_REGION=$(curl --silent http://169.254.169.254/2016-09-02/dynamic/instance-identity/document | jq -r .region)
+
+aws ssm describe-parameters --output json | jq -r '.Parameters[] | .Name' | xargs aws ssm get-parameters --output json --with-decryption --names | jq '.Parameters | map({ (.Name): .Value }) | add' > /etc/ec2-metadata/ssm-params.json

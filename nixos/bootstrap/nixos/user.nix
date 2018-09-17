@@ -7,5 +7,5 @@
 # builtins.fetch* commands; which the user might want to use
 # in their config.
 {
-  imports = [ <user/configuration.nix> ];
+  imports = [ <user/nixos/configuration.nix> ];
 }

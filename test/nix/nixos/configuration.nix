@@ -3,9 +3,8 @@
 {
   security.sudo.wheelNeedsPassword = false;
 
-  users.motd = ''
-    Today is Sweetmorn, the 4th day of The Aftermath in the YOLD 3178.
-  '';
+  # Get the motd from an ssm parameter we created with Terraform
+  users.motd = config.ssm-params.motd;
 
   environment.systemPackages = [ pkgs.jq ];
 
