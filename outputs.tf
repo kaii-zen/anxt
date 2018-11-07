@@ -18,8 +18,17 @@ output "iam_instance_profile" {
   value       = "${module.ec2-iam-role.profile_name}"
 }
 
+output "tags_map" {
+  description = "Tags required for the correct operation of this module; in map format expected by the aws_instance resource."
+
+  value = {
+    Name = "${var.display_name} (${local.pet_title})"
+    Id   = "${local.id}"
+  }
+}
+
 output "tags" {
-  description = "Tags required for the correct operation of this module."
+  description = "Tags required for the correct operation of this module; in array format expected by the aws_autoscaling_group resource."
 
   value = [
     {
