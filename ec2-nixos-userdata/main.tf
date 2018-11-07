@@ -1,6 +1,6 @@
 variable "channels" {
   default = {
-    nixos = "http://nixos.org/channels/nixos-18.03"
+    nixos = "http://nixos.org/channels/nixos-18.09"
   }
 }
 

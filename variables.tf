@@ -1,5 +1,5 @@
 variable "nixos_release" {
-  default = "18.03"
+  default = "18.09"
 }
 
 variable "display_name" {
