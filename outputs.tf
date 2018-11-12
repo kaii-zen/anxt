@@ -5,7 +5,7 @@ output "name" {
 
 output "name_prefix" {
   description = "same as `name` but with a dash at the end"
-  value       = "${local.name}-"
+  value       = "${local.name_prefix}"
 }
 
 output "image_id" {

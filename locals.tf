@@ -3,6 +3,7 @@ locals {
   name_kebab_lowercase = "${lower(local.name_kebab)}"
   name_CamelCase       = "${replace(title(var.display_name), " ", "")}"
   name                 = "${local.name_kebab_lowercase}-${local.pet}"
+  name_prefix          = "${local.name}-"
 
   pet           = "${random_pet.this.id}"
   pet_title     = "${title(replace(local.pet, "-", " "))}"
