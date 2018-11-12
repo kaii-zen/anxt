@@ -18,6 +18,7 @@ module "ssm_nixos_rebuild_switch" {
           runCommand = [
             "cp /root/.nix-defexpr/channels/bootstrap/nixos/user.nix /etc/nixos/user.nix",
             "/run/current-system/sw/bin/nix-channel --update",
+            "/root/.nix-defexpr/channels/bootstrap/fetch-ec2-tags",
             "/root/.nix-defexpr/channels/bootstrap/fetch-ssm-params",
             "/run/current-system/sw/bin/nixos-rebuild switch",
           ]
