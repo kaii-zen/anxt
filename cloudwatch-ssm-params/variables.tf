@@ -8,6 +8,10 @@ variable "cloudwatch_rule_description" {
   default = "Invoke an SSM Run Command Document in response to updating an SSM parameter"
 }
 
+variable "ssm_path_arns" {
+  default = ["*"]
+}
+
 variable "run_command_document_arn" {
   type = "string"
 }

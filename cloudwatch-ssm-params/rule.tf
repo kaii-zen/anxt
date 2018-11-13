@@ -2,6 +2,8 @@ locals {
   event_pattern = {
     source      = ["aws.ssm"]
     detail-type = ["Parameter Store Change"]
+
+    resources = ["${var.ssm_path_arns}"]
   }
 }
 

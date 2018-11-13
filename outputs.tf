@@ -15,15 +15,15 @@ output "image_id" {
 
 output "iam_instance_profile" {
   description = "Instance profile containing all required permissions."
-  value       = "${module.ec2-iam-role.profile_name}"
+  value       = "${aws_iam_instance_profile.this.name}"
 }
 
 output "tags_map" {
   description = "Tags required for the correct operation of this module; in map format expected by the aws_instance resource."
 
   value = {
-    Name = "${var.display_name} (${local.pet_title})"
-    Id   = "${local.id}"
+    Name     = "${var.display_name} (${local.pet_title})"
+    ssm-path = "${local.ssm_path}"
   }
 }
 
@@ -37,8 +37,8 @@ output "tags" {
       propagate_at_launch = true
     },
     {
-      key                 = "Id"
-      value               = "${local.id}"
+      key                 = "ssm-path"
+      value               = "${local.ssm_path}"
       propagate_at_launch = true
     },
   ]
@@ -47,4 +47,12 @@ output "tags" {
 output "userdata" {
   description = "The user metadata document that must be passed to the instance in order to bootstrap the SSM agent which is required by this module."
   value       = "${module.userdata_nix.rendered}"
+}
+
+output "ssm_path" {
+  value = "${local.ssm_path}"
+}
+
+output "secretsmanager_path" {
+  value = "${local.secretsmanager_path}"
 }

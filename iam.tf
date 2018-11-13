@@ -9,9 +9,7 @@ data "aws_iam_policy_document" "allow_read_own_ssm_params" {
       "ssm:List*",
     ]
 
-    resources = [
-      "arn:aws:ssm:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:parameter${local.ssm_path}/*",
-    ]
+    resources = ["${local.ssm_path_arn}"]
   }
 }
 
@@ -42,7 +40,7 @@ data "aws_iam_policy_document" "allow_read_own_secrets" {
     ]
 
     resources = [
-      "arn:aws:secretsmanager:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:secret:${local.secrets_path}/*",
+      "arn:aws:secretsmanager:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:secret:${local.secretsmanager_path}/*",
     ]
   }
 }

@@ -1,0 +1,22 @@
+{
+  "description": "",
+  "mainSteps": [
+    {
+      "action": "aws:runShellScript",
+      "inputs": {
+        "runCommand": [
+          "cp /root/.nix-defexpr/channels/bootstrap/nixos/user.nix /etc/nixos/user.nix",
+          "/run/current-system/sw/bin/nix-channel --update",
+          "/root/.nix-defexpr/channels/bootstrap/fetch-ec2-tags",
+          "/root/.nix-defexpr/channels/bootstrap/fetch-ssm-params",
+          "/root/.nix-defexpr/channels/bootstrap/fetch-secrets",
+          "/run/current-system/sw/bin/nixos-rebuild switch"
+        ]
+      },
+      "name": "nixosRebuildSwitch",
+      "timeoutSeconds": 3600
+    }
+  ],
+  "parameters": {},
+  "schemaVersion": "2.2"
+}

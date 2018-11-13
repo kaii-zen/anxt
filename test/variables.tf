@@ -1,8 +1,3 @@
-variable "count" {
-  description = "Number of instances in the asg"
-  default     = 1
-}
-
 variable "subnet_ids" {
   type        = "list"
   description = "Subnet IDs for the autoscaling group"
