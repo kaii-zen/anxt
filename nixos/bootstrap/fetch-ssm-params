@@ -6,4 +6,4 @@ set -eo pipefail
 export AWS_DEFAULT_REGION=$(curl --silent http://169.254.169.254/2016-09-02/dynamic/instance-identity/document | jq -r .region)
 SSM_PATH=$(jq -r '."ssm-path"' /etc/ec2-metadata/tags.json)/
 
-aws ssm get-parameters-by-path --path $SSM_PATH | jq -r '.Parameters[] | .Name' | xargs aws ssm get-parameters --output json --with-decryption --names | jq ".Parameters | map({ (.Name | ltrimstr(\"$SSM_PATH\")): .Value }) | add" > /etc/ec2-metadata/ssm-params.json
+aws ssm get-parameters-by-path --recursive --path $SSM_PATH | jq -r '.Parameters[] | .Name' | xargs aws ssm get-parameters --output json --with-decryption --names | jq ".Parameters | map({ (.Name | ltrimstr(\"$SSM_PATH\")): .Value }) | add" > /etc/ec2-metadata/ssm-params.json
