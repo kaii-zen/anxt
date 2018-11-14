@@ -18,7 +18,8 @@ locals {
   ssm_path            = "/${local.prefix}/${local.name_kebab_lowercase}/${local.pet}"
   ssm_path_arn        = "arn:aws:ssm:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:parameter${local.ssm_path}/*"
 
-  nixos_rebuild_switch_arn = "${aws_ssm_document.nixos_rebuild_switch.arn}"
+  nixos_rebuild_switch_arn  = "${aws_ssm_document.nixos_rebuild_switch.arn}"
+  nixos_rebuild_switch_name = "${aws_ssm_document.nixos_rebuild_switch.name}"
 
   bootstrap_nix_key = "${aws_s3_bucket_object.bootstrap_nix.key}"
   user_nix_key      = "${aws_s3_bucket_object.user_nix.key}"

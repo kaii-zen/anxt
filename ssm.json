@@ -13,8 +13,7 @@
           "/run/current-system/sw/bin/nixos-rebuild switch"
         ]
       },
-      "name": "nixosRebuildSwitch",
-      "timeoutSeconds": 3600
+      "name": "nixosRebuildSwitch"
     }
   ],
   "parameters": {},

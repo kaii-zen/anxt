@@ -3,7 +3,7 @@ locals {
     source      = ["aws.ssm"]
     detail-type = ["Parameter Store Change"]
 
-    resources = ["${var.ssm_path_arns}"]
+    #resources = ["${var.ssm_path_arns}"]
   }
 }
 

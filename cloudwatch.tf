@@ -21,10 +21,11 @@ module "watch_ssm_parameters" {
   cloudwatch_rule_description = "Run `nixos-rebuild switch` on all instances with tagged `ssm-path:${local.ssm_path}` whenever SSM parameters change"
 
   run_command_document_arn  = "${local.nixos_rebuild_switch_arn}"
+  run_command_document_name = "${local.nixos_rebuild_switch_name}"
   run_command_target_key    = "ssm-path"
   run_command_target_values = ["${local.ssm_path}"]
 
-  ssm_path_arns = ["${local.ssm_path_arn}"]
+  ssm_path = "${local.ssm_path}"
 }
 
 # Whenever eitehr changes we must rebuild the system

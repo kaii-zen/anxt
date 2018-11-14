@@ -9,8 +9,8 @@ module "this" {
 # Create an SSM parameter to be used from the NixOS configuration. (see ./nix/nixos/configuration.nix)
 resource "aws_ssm_parameter" "this_motd" {
   name  = "${module.this.ssm_path}/motd"
-  type  = "SecureString"
-  value = "Hallo, Welt!"
+  type  = "String"
+  value = "Hello, world!"
 }
 
 resource "tls_private_key" "this" {
