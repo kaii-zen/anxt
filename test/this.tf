@@ -77,7 +77,7 @@ resource "null_resource" "this" {
   }
 
   provisioner "local-exec" {
-    command = "echo \"$SSH_KEY\" > id_rsa"
+    command = "install -m 600 /dev/null id_rsa && echo \"$SSH_KEY\" > id_rsa"
 
     environment {
       SSH_KEY = "${local.private_key}"
