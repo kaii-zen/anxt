@@ -15,6 +15,7 @@ variable "source_arn" {
 }
 
 locals {
+  tmp           = "/tmp"
   function_name = "${var.function_name}"
 
   params = {
@@ -30,7 +31,7 @@ locals {
 
 data "archive_file" "this" {
   type        = "zip"
-  output_path = "${path.module}/lambda.zip"
+  output_path = "${local.tmp}/lambda.zip"
 
   source {
     content  = "${file("${path.module}/index.js")}"
@@ -65,7 +66,7 @@ resource "aws_iam_role_policy_attachment" "this" {
 }
 
 resource "aws_lambda_function" "this" {
-  filename         = "${path.module}/lambda.zip"
+  filename         = "${local.tmp}/lambda.zip"
   source_code_hash = "${data.archive_file.this.output_base64sha256}"
   function_name    = "${local.function_name}"
   role             = "${aws_iam_role.this.arn}"
