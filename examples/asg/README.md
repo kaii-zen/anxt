@@ -1,6 +1,6 @@
  ASG Example
 
-This demonstrates how to use Anxt to run launch an autoscaling group in EC2 and configuring its `motd` using an SSM parameter.
+This demonstrates how to use Anxt to launch an autoscaling group in EC2 and configuring its `motd` using an SSM parameter.
 
 | File         | Description                                  |
 | ---          | ---                                          |
