@@ -2,7 +2,7 @@
 
 { resource, module, ... }:
 
-{ displayName, nixosConfig, keyName, s3Bucket
+{ displayName, nixosConfig, keyName, s3Bucket, s3Prefix, securityGroups, subnetIds
 , instanceType    ? "t2.micro"
 , nixosRelease    ? "18.09"
 , rootSize        ? 50
@@ -10,6 +10,11 @@
 , minSize         ? 1
 , maxSize         ? 1
 , desiredCapacity ? 1 }:
+
+assert builtins.isString s3Bucket;
+assert builtins.isString s3Prefix;
+assert builtins.isList securityGroups && securityGroups != [];
+assert builtins.isList subnetIds && subnetIds != [];
 
 let
   inherit (pkgs) lib runCommand;
@@ -42,11 +47,11 @@ let
     attrs = {
       instance_type        =  instanceType;
       key_name             =  keyName;
+      security_groups      = securityGroups;
       name_prefix          =  "\${module.${resourceName}.name_prefix}";
       image_id             =  "\${module.${resourceName}.image_id}";
       iam_instance_profile =  "\${module.${resourceName}.iam_instance_profile}";
       user_data            =  "\${module.${resourceName}.userdata}";
-      security_groups      = ["\${var.security_groups}"];
 
       root_block_device = {
         volume_size = toString rootSize;
@@ -61,14 +66,14 @@ let
 
   autoscalingGroup =
   resource "aws_autoscaling_group" resourceName {
-    depends_on           =    ["module.${resourceName}"];
-    name                 =  "\${aws_launch_configuration.${resourceName}.name}";
-    launch_configuration =  "\${aws_launch_configuration.${resourceName}.name}";
-    vpc_zone_identifier  = ["\${var.subnet_ids}"];
-    tags                 = ["\${module.${resourceName}.tags}"];
+    vpc_zone_identifier  =  subnetIds;
     min_size             =  minSize;
     max_size             =  maxSize;
     desired_capacity     =  desiredCapacity;
+    depends_on           =    ["module.${resourceName}"];
+    name                 =  "\${aws_launch_configuration.${resourceName}.name}";
+    launch_configuration =  "\${aws_launch_configuration.${resourceName}.name}";
+    tags                 = ["\${module.${resourceName}.tags}"];
   } [];
 
 in [ anxt launchConfiguration autoscalingGroup ]

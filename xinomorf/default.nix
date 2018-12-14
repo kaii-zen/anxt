@@ -2,6 +2,6 @@
 , pkgs ? import <nixpkgs> {} }:
 
 {
-  mkAnxtGroup   = import ./make-anxt-group.nix   { inherit pkgs; } stubs;
-  mkAnxtChannel = import ./make-anxt-channel.nix { inherit pkgs; } stubs;
+  mkAutoScalingGroup = import ./autoscaling.nix { inherit pkgs; } stubs;
+  mkS3Channel        = import ./s3-channel.nix  { inherit pkgs; } stubs;
 }

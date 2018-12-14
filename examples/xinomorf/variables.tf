@@ -8,6 +8,11 @@ variable "security_groups" {
   description = "Security group IDs for the austoscaling group"
 }
 
+variable "key_name" {
+  type        = "string"
+  description = "ssh key to use"
+}
+
 variable "s3_bucket" {
   type        = "string"
   description = "This is the S3 bucket in which we are going to store the currently active nix expression."
