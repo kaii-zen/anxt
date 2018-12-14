@@ -14,7 +14,7 @@ variable "binary-cache-url" {
 locals {
   external_cmd = [
     "${path.module}/nix-build-wrapper",
-    "${path.module}/channel.nix",
+    "${path.module}",
     "${var.name}",
     "${var.nixexprs}",
     "${var.binary-cache-url}",
