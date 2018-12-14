@@ -1,11 +1,8 @@
-{ lib, pkgs, config, ... }:
 {
-  # That's all the config we need to enable SSM to rebuild the system
-  services.ssm-agent.enable = true;
-  imports = [ ./anxt.nix ./ec2-tags.nix ./ssm-params.nix ./nix-s3-cache.nix ];
-  systemd.services.ssm-agent = {
-    path = with pkgs; [ bash git gnutar gzip config.system.build.nixos-rebuild ];
-    environment.NIX_PATH = builtins.concatStringsSep ":" config.nix.nixPath;
-    serviceConfig.Restart = lib.mkForce "always";
-  };
+  imports = [
+    ./anxt.nix
+    ./ec2-tags.nix
+    ./ssm-agent.nix
+    ./ssm-params.nix
+    ./nix-s3-cache.nix ];
 }
