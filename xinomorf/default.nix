@@ -1,7 +1,13 @@
 { stubs
-, pkgs ? import <nixpkgs> {} }:
+, helpers
+, newScope }:
 
-{
-  mkAutoScalingGroup = import ./autoscaling.nix { inherit pkgs; } stubs;
-  mkS3Channel        = import ./s3-channel.nix  { inherit pkgs; } stubs;
-}
+let
+  callModule = module: overrides: (newScope self) module ({ inherit helpers; } // stubs // overrides);
+  self = rec {
+    mkAutoScalingGroup = callModule ./autoscaling.nix {};
+    mkInstance         = callModule ./instance.nix    {};
+    mkS3Channel        = callModule ./s3-channel.nix  {};
+    mkPlumbing         = callModule ./plumbing.nix    {};
+  };
+in self

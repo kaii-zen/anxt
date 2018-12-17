@@ -1,5 +1,3 @@
-{ pkgs }:
-
 { resource, ... }:
 
 { name, s3, nixexprs }:
