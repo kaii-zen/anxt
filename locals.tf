@@ -23,11 +23,16 @@ locals {
 
   bootstrap_nix_key = "${aws_s3_bucket_object.bootstrap_nix.key}"
   user_nix_key      = "${aws_s3_bucket_object.user_nix.key}"
+  s3_watch_keys     = "${concat(list(local.bootstrap_nix_key, local.user_nix_key), formatlist("${local.prefix}/%s", values(var.extra_s3_channels)))}"
   s3_prefix         = "${local.prefix}/${local.name}"
 
-  channels = {
+  primary_channels = {
     nixos     = "http://nixos.org/channels/nixos-${var.nixos_release}"
     bootstrap = "s3://${var.s3_bucket}/${local.bootstrap_nix_key}"
     user      = "s3://${var.s3_bucket}/${local.user_nix_key}"
   }
+
+  s3_channels = "${zipmap(keys(var.extra_s3_channels), formatlist("s3://${var.s3_bucket}/${var.prefix}/%s", values(var.extra_s3_channels)))}"
+
+  channels = "${merge(local.primary_channels, local.s3_channels)}"
 }

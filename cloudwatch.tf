@@ -5,8 +5,10 @@ module "watch_s3_objects" {
   cloudwatch_rule_name        = "${local.name_CamelCase}-${local.pet_CamelCase}-S3ChannelUpdated"
   cloudwatch_rule_description = "Run `nixos-rebuild switch` on all instances tagged `ssm-path:${local.ssm_path}` whenever ${local.bootstrap_nix_key} or ${local.user_nix_key} change"
 
-  s3_bucket  = "${var.s3_bucket}"
-  s3_objects = ["${local.bootstrap_nix_key}", "${local.user_nix_key}"]
+  s3_bucket = "${var.s3_bucket}"
+
+  #s3_objects = ["${local.bootstrap_nix_key}", "${local.user_nix_key}"]
+  s3_objects = ["${local.s3_watch_keys}"]
 
   run_command_document_arn  = "${local.nixos_rebuild_switch_arn}"
   run_command_target_key    = "ssm-path"

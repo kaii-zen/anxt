@@ -1,9 +1,8 @@
 { stubs
-, helpers
 , newScope }:
 
 let
-  callModule = module: overrides: (newScope self) module ({ inherit helpers; } // stubs // overrides);
+  callModule = module: overrides: (newScope self) module (stubs // overrides);
   self = rec {
     mkAutoScalingGroup = callModule ./autoscaling.nix {};
     mkInstance         = callModule ./instance.nix    {};
