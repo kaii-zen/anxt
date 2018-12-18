@@ -15,6 +15,6 @@ variable "s3_bucket" {
 
 variable "s3_prefix" {
   type        = "string"
-  default     = "asg"
+  default     = "anxttest"
   description = "The prefix under which Nix expressions and other configuration-specific state data will be stored. i.e., for the default value 'asg', expressions will be saved under asg/<config-id>/nixos/nixexprs.tar.xz"
 }
