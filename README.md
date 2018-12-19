@@ -8,7 +8,7 @@ In a nutshell: this is a Terraform module that leverages various AWS services in
 
 ## What's up with the name?
 
-I'm not sure I even remember. Let's just say it stands for *A*WS *N*i*x*OS *T*erraform. The X is thrown in there because I find Angst more relatable than Ant (the creature or the Java build tool) in this context. It is precisely what I feel whenever I have to change anything here 😅😬
+I'm not sure I even remember. Let's just say it stands for **A**WS **N**i**x**OS **T**erraform. The X is thrown in there because I find Angst more relatable than Ant (the creature or the Java build tool) in this context. It is precisely what I feel whenever I have to change anything here 😅😬
 
 ## Why not just use NixOps?
 
@@ -80,7 +80,7 @@ $ cat nix/nixos/configuration.nix
 $
 ```
 
-The module just prepares the "plumbing". We can then use its outputs to start either an instance or an autoscaling group (see `[examples/asg](examples/asg)`).
+The module just prepares the "plumbing". We can then use its outputs to start either an instance or an autoscaling group (see [examples/asg](examples/asg)).
 By "plumbing" I mean that, among other things, it:
 
 - generates a random "pet" name (something like "wonky albatross", "drunken kangaroo", "wasted kitten", etc); this is then used in various places to help segregate/differentiate generations of config
@@ -89,11 +89,11 @@ By "plumbing" I mean that, among other things, it:
 - generates userdata to pass to the "aws_instance" (or "aws_launch_configuration") resource
 - creates an SSM runCommand document that (among other things) runs `nixos-rebuild switch`
 - sets up cloudwatch rules that will trigger above SSM document whenever:
-  - the expressions on S3 change (this requires setting up cloudtrail. see `[cloudtrail](cloudtrail)`)
-  - an SSM parameter changes under `<prefix>/<config-name>/<pet-name>` (see `[test](test)` for an example of using SSM parameters)
+  - the expressions on S3 change (this requires setting up cloudtrail. see [cloudtrail](cloudtrail))
+  - an SSM parameter changes under `<prefix>/<config-name>/<pet-name>` (see [test](test) for an example of using SSM parameters)
 
 That's pretty much it. In a nutshell.
-Oh, it's also possible to relay secrets through AWS Secrets Manager (see `[test](test)`).
+Oh, it's also possible to relay secrets through AWS Secrets Manager (see [test](test)).
 The [xinomorf](xinomorf) [bits](examples/xinomorf) are experimental and subject to change and breakage.
 (Heck; this whole thing is experimental and might murder your kittens so be warned! I do use it in production though 🙃)
 

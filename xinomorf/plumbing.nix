@@ -2,7 +2,8 @@
 , module, ... }:
 
 { displayName, nixosConfig, s3Bucket, s3Prefix
-, nixosRelease ? "18.09" }:
+, nixosRelease ? "18.09"
+, extraS3Channels ? {} }:
 
 assert builtins.isString s3Bucket;
 assert builtins.isString s3Prefix;
@@ -21,7 +22,7 @@ let
   anxt =
   module resourceName {
     source        = "${../.}";
-    inherit nixexprs displayName nixosRelease s3Bucket;
+    inherit nixexprs displayName nixosRelease s3Bucket extraS3Channels;
   };
 in anxt // rec {
   module             = "module.${resourceName}";
