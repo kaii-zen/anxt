@@ -7,7 +7,6 @@ module "watch_s3_objects" {
 
   s3_bucket = "${var.s3_bucket}"
 
-  #s3_objects = ["${local.bootstrap_nix_key}", "${local.user_nix_key}"]
   s3_objects = ["${local.s3_watch_keys}"]
 
   run_command_document_arn  = "${local.nixos_rebuild_switch_arn}"
