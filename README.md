@@ -110,6 +110,11 @@ That's it.
 
 Consult the examples. I realize that the README might be inaccurate or downright wrong at times but I try to keep the examples working at the very least. If they aren't feel free to hound me in the issues.
 
+## Current limitations
+
+- Different configs can't share SSM parameters or SecretsManager secrets (config channels *can* be shared; see `test/channel.tf`)
+- Channels cannot be added/removed after-the-fact on running instances (can be done manually but ew); a new instance must be created.
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
